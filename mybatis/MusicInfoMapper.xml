@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.MusicInfoDao">
+
+    <select id="selectAll" resultType="pojo.MusicInfo">
+        select * from musicinfo
+    </select>
+    <update id="updateLike" parameterType="pojo.MusicInfo">
+        update musicinfo set mlikeNum=mlikeNum+1 where mid = #{mid}
+    </update>
+    <update id="updateDislike" parameterType="pojo.MusicInfo">
+        update musicinfo set mdislikeNum=mdislikeNum+1 where mid = #{mid}
+    </update>
+    <update id="updatePlayNum" parameterType="pojo.MusicInfo">
+        update musicinfo set mplayNum=mplayNum+1 where mid = #{mid}
+    </update>
+    <update id="updateDownNum" parameterType="pojo.MusicInfo">
+        update musicinfo set mdownNum=mdownNum+1 where mid = #{mid}
+    </update>
+    <select id="selectMusicInfoByMid" parameterType="Integer" resultType="pojo.MusicInfo">
+        select * from musicinfo where mid = #{mid}
+    </select>
+    <select id="selectTop10" resultType="pojo.MusicInfo">
+        select * from musicinfo order by mplayNum desc limit 10
+    </select>
+    <insert id="insertMusic" parameterType="pojo.MusicInfo">
+        insert into musicinfo (uname,mname,msinger,mstyle,mupTime,mloca) values(#{uname},#{mname},#{msinger},#{mstyle},#{mupTime},#{mloca})
+    </insert>
+    <select id="selectByMname" parameterType="pojo.MusicInfo" resultType="pojo.MusicInfo">
+        select * from musicinfo where mname like "%"#{mname}"%"
+    </select>
+    <select id="selectByMsinger" parameterType="pojo.MusicInfo" resultType="pojo.MusicInfo">
+        select * from musicinfo where msinger like "%"#{msinger}"%"
+    </select>
+    <select id="selectByMstyle" parameterType="pojo.MusicInfo" resultType="pojo.MusicInfo">
+        select * from musicinfo where mstyle like "%"#{mstyle}"%"
+    </select>
+    <select id="selectTopnew" resultType="pojo.MusicInfo">
+            select * from musicinfo order by mupTime desc limit 10
+    </select>
+    <select id="selectToplike" resultType="pojo.MusicInfo">
+            select * from musicinfo order by mlikeNum desc limit 10
+    </select>
+</mapper>

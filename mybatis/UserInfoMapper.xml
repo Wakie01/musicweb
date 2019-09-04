@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.UserInfoDao">
+
+    <select id="selectAll" resultType="pojo.UserInfo">
+        select * from userinfo
+    </select>
+    <select id="selectAllByUserInfoName" resultType="pojo.UserInfo" parameterType="pojo.UserInfo">
+        select * from userinfo where uname = #{uname}
+    </select>
+    <select id="selectAllByUserName" resultType="pojo.UserInfo" parameterType="pojo.User">
+        select * from userinfo where uname = #{uname}
+    </select>
+    <update id="updateTuploadByUname" parameterType="pojo.UserInfo">
+        update userinfo set tupload = tupload + 1 where uname = #{uname}
+    </update>
+    <insert id="insertUserInfo" parameterType="pojo.User">
+        insert into userinfo (uname) value(#{uname})
+    </insert>
+    <select id="selectUserGrade" parameterType="pojo.UserInfo" resultType="Integer">
+        select ugrade from userinfo where uname = #{uname}
+    </select>
+    <select id="selectUserUploadNum" parameterType="pojo.UserInfo" resultType="Integer">
+        select tupload from userinfo where uname = #{uname}
+    </select>
+    <update id="updateUgradeByUname" parameterType="pojo.UserInfo">
+        update userinfo set ugrade=ugrade + 1 where uname = #{uname}
+    </update>
+    <update id="updateUroomByUname" parameterType="pojo.UserInfo">
+        update userinfo set uroom=uroom*2 where uname = #{uname}
+    </update>
+    <select id="selectRmspace" parameterType="pojo.UserInfo" resultType="Double">
+        select urmspace from userinfo where uname = #{uname}
+    </select>
+    <select id="selectUroom" parameterType="pojo.UserInfo" resultType="Double">
+        select uroom from userinfo where uname = #{uname}
+    </select>
+    <update id="modifyRmspace" parameterType="pojo.UserInfo">
+        update userinfo set urmspace = #{urmspace} where uname = #{uname}
+    </update>
+</mapper>
